@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<style>
+:root {
+  --terminal-green: #00ff00;
+  --terminal-black: #000000;
+  --terminal-gray: #333333;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+body {
+  background-color: var(--terminal-black);
+  color: var(--terminal-green);
+  font-family: "Courier New", monospace;
+  padding: 20px;
+  margin: 0;
+  line-height: 1.4;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.terminal {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.prompt::before {
+  content: "visitor@neocities:~$ ";
+  opacity: 0.8;
+}
+
+.cursor {
+  display: inline-block;
+  width: 8px;
+  height: 15px;
+  background: var(--terminal-green);
+  animation: blink 1s infinite;
+  vertical-align: middle;
+}
+
+.directory {
+  padding-left: 20px;
+  border-left: 1px dotted var(--terminal-gray);
+}
+
+.file {
+  padding: 5px 0;
+}
+
+.file::before {
+  content: "└─ ";
+  color: var(--terminal-gray);
+}
+
+.command-output {
+  padding: 10px;
+  margin: 10px 0;
+  background: rgba(0, 255, 0, 0.1);
+}
+
+.permission-denied {
+  color: #ff0000;
+}
+
+.system-info {
+  border: 1px solid var(--terminal-green);
+  padding: 10px;
+  margin: 10px 0;
+}
+
+.loading {
+  display: inline-block;
+  animation: rotate 1s linear infinite;
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.menu-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--terminal-gray);
+  padding: 5px;
+  display: flex;
+  gap: 10px;
+}
+
+.function-key {
+  color: var(--terminal-black);
+  background: var(--terminal-green);
+  padding: 2px 5px;
+  border-radius: 3px;
+}
+</style>
+</head>
+<body>
+  <div class="terminal">
+    <div class="system-info">
+      Welcome to NeoCities OS 1.0.0
+      Last login: Sat Nov 23 12:34:56 2024
+    </div>
+
+    <div class="prompt">ls -la ~/blog</div>
+    <div class="command-output">
+      total 42
+      drwxr-xr-x  2 visitor visitor 4096 Nov 23 12:34 .
+      drwxr-xr-x 15 visitor visitor 4096 Nov 23 12:34 ..
+      -rw-r--r--  1 visitor visitor 8192 Nov 23 12:34 about.txt
+      -rw-r--r--  1 visitor visitor 2048 Nov 23 12:34 diary.md
+      drwxr-xr-x  2 visitor visitor 4096 Nov 23 12:34 images
+    </div>
+
+    <div class="directory">
+      <div class="file">about.txt</div>
+      <div class="file">diary.md</div>
+      <div class="file">images/</div>
+    </div>
+
+    <div class="prompt">cat about.txt</div>
+    <div class="command-output">
+      Name: CyberDreamer
+      Status: Currently in the digital void
+      Interests: ASCII art, system administration, retro computing
+      
+      This website is best viewed in a terminal emulator.
+      No GUI? No problem!
+    </div>
+
+    <div class="prompt">sudo rm -rf /</div>
+    <div class="permission-denied">
+      Permission denied: Nice try! ^_^
+    </div>
+
+    <div class="prompt">neofetch</div>
+    <div class="command-output">
+           .-/+oossssoo+/-.               visitor@neocities
+        `:+ssssssssssssssssss+:`         -------------------
+      -+ssssssssssssssssssyyssss+-       OS: NeoCities OS 1.0.0
+    .ossssssssssssssssssdMMMNysssso.     Host: Digital Dreams
+   /ssssssssssshdmmNNmmyNMMMMhssssss/    Kernel: 5.4.0-cyberpunk
+  +ssssssssshmydMMMMMMMNddddyssssssss+   Uptime: 23 days, 4 hours
+ /sssssssshNMMMyhhyyyyhmNMMMNhssssssss/  Packages: 1337
+.ssssssssdMMMNhsssssssssshNMMMdssssssss. Shell: bash 5.0.17
++sssshhhyNMMNyssssssssssssyNMMMysssssss+ Memory: 8192MB / 16384MB
+ossyNMMMNyMMhsssssssssssssshmmmhssssssso CPU: Intel i7-9750H
+ossyNMMMNyMMhsssssssssssssshmmmhssssssso
++sssshhhyNMMNyssssssssssssyNMMMysssssss+
+.ssssssssdMMMNhsssssssssshNMMMdssssssss.
+ /sssssssshNMMMyhhyyyyhdNMMMNhssssssss/
+  +sssssssssdmydMMMMMMMMddddyssssssss+
+   /ssssssssssshdmNNNNmyNMMMMhssssss/
+    .ossssssssssssssssssdMMMNysssso.
+      -+sssssssssssssssssyyyssss+-
+        `:+ssssssssssssssssss+:`
+            .-/+oossssoo+/-.
+    </div>
+
+    <div class="prompt">_<span class="cursor"></span></div>
+  </div>
+
+  <div class="menu-bar">
+    <span class="function-key">F1:Help</span>
+    <span class="function-key">F2:Save</span>
+    <span class="function-key">F3:Load</span>
+    <span class="function-key">F4:Edit</span>
+    <span class="function-key">F5:Copy</span>
+    <span class="function-key">F6:Move</span>
+    <span class="function-key">F7:MkDir</span>
+    <span class="function-key">F8:Del</span>
+  </div>
+</body>
+</html>
